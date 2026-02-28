@@ -10,6 +10,8 @@ import Search from "./pages/Search";
 import Song from "./pages/Song";
 import Profile from "./pages/Profile";
 import Activity from "./pages/Activity";
+import Onboarding from "./pages/Onboarding";
+import Discover from "./pages/Discover";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/discover" element={<Discover />} />
             <Route path="/search" element={<Search />} />
             <Route path="/song/:id" element={<Song />} />
             <Route path="/profile/:id" element={<Profile />} />

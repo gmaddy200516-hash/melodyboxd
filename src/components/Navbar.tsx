@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, User, LogOut, Menu, X, Music } from 'lucide-react';
+import { Search, User, LogOut, Menu, X, Music, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
@@ -57,6 +57,12 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             {user ? (
               <>
+                <Link to="/discover">
+                  <Button variant="ghost">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Discover
+                  </Button>
+                </Link>
                 <Link to="/activity">
                   <Button variant="ghost">Activity</Button>
                 </Link>
@@ -115,6 +121,12 @@ export function Navbar() {
           <div className="flex flex-col gap-2">
             {user ? (
               <>
+                <Link to="/discover" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    Discover
+                  </Button>
+                </Link>
                 <Link to="/activity" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">
                     Activity

@@ -127,18 +127,27 @@ export default function Song() {
         review_text: reviewText || null,
       };
 
+      let reviewId: string;
+
       if (existingReview) {
         const { error } = await supabase
           .from('song_reviews')
           .update(reviewData)
           .eq('id', existingReview.id);
         if (error) throw error;
+        reviewId = existingReview.id;
       } else {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('song_reviews')
-          .insert(reviewData);
+          .insert(reviewData)
+          .select('id')
+          .single();
         if (error) throw error;
+        reviewId = data.id;
       }
+
+      const { analyzeAndStoreSentiment } = await import('@/lib/sentiment-analyzer');
+      await analyzeAndStoreSentiment(reviewId, reviewText);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userReview', id, user?.id] });
